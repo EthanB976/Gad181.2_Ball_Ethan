@@ -14,6 +14,8 @@ namespace EB
         public float mouseY;
 
         public bool b_Input;
+        public bool rb_Input;
+        public bool rt_Input;
 
         public bool rollFlag;
         public bool sprintFlag;
@@ -21,14 +23,20 @@ namespace EB
         
 
         PlayerControls inputActions;
+        PlayerAttacker playerAttacker;
+        PlayerInventory playerInventory;
         
 
         Vector2 movementInput;
         Vector2 cameraInput;
 
-        
 
-        
+        private void Awake()
+        {
+            playerAttacker = GetComponent<PlayerAttacker>();
+            playerInventory = GetComponent<PlayerInventory>();
+        }
+
 
         public void OnEnable()
         {
@@ -53,6 +61,7 @@ namespace EB
         {
             MoveInput(delta);
             HandleRollInput(delta);
+            HandleAttackinput(delta);
         }
 
 
@@ -92,7 +101,23 @@ namespace EB
 
 
 
+        private void HandleAttackinput(float delta)
+        {
+            inputActions.PlayerActions.RB.performed += inputActions => rb_Input = true;
+            inputActions.PlayerActions.RT.performed += inputActions => rt_Input = true;
 
+
+            //RB Input handles the right hand weapon's light attack
+            if (rb_Input)
+            {
+                playerAttacker.HandleLightAttack(playerInventory.rightweapon);
+            }
+
+            if (rt_Input)
+            {
+                playerAttacker.HandleHeavyAttack(playerInventory.rightweapon);
+            }
+        }
 
 
 
