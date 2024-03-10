@@ -20,12 +20,18 @@ namespace EB
         public bool isInAir;
         public bool isGrounded;
 
+
+        private void Awake()
+        {
+            cameraHandler = FindObjectOfType<CameraHandler>();
+        }
+
         void Start()
         {
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
-            cameraHandler = CameraHandler.singleton;
+           
         }
 
 

@@ -20,7 +20,7 @@ namespace EB
         public new Rigidbody rigidbody;
         public GameObject normalCamera;
 
-        [Header("Griund & Air Detection Stats")]
+        [Header("Ground & Air Detection Stats")]
         [SerializeField] float groundDetectionRayStartPoint = 0.5f;
         [SerializeField] float minimumDistanceNeededToBeginFall = 1f;
         [SerializeField] float groundedDirectionRayDistance = -0.2f;
@@ -194,7 +194,7 @@ namespace EB
                     else
                     {
                        
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                      
                     }
@@ -233,6 +233,16 @@ namespace EB
                     myTransform.position = targetPosition;
                 }
             }
+
+            if (playerManager.isInteracting || inputHandler.moveAmount > 0)
+            {
+                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else
+            {
+                myTransform.position = targetPosition;
+            }
+
         }
 
         #endregion

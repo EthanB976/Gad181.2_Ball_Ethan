@@ -25,9 +25,17 @@ namespace EB
         {
             if (currentWeaponModel != null)
             {
-                Destroy(currentWeaponModel);
+               UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(currentWeaponModel, true);
+
             }
+            else
+            {
+                DestroyImmediate(currentWeaponModel);
+            }
+                
+            
         }
+
 
         public void LoadWeaponModel(WeaponItem weaponItem)
         {
