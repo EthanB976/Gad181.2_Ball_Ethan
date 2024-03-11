@@ -23,15 +23,15 @@ namespace EB
 
         public void UnloadWeaponAndDestroy()
         {
-            if (currentWeaponModel != null)
-            {
-               UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(currentWeaponModel, true);
+            //if (currentWeaponModel != null)
+            //{
+            //   UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(currentWeaponModel, true);
 
-            }
-            else
-            {
-                DestroyImmediate(currentWeaponModel);
-            }
+            //}
+            //else
+            //{
+            //    DestroyImmediate(currentWeaponModel);
+            //}
                 
             
         }
