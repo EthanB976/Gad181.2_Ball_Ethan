@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace EB
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         InputHandler inputHandler;
         Animator anim;
@@ -31,14 +31,16 @@ namespace EB
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
-           
+            playerLocomotion.HandleJumping();
+
+
         }
 
 
         void Update()
         {
             isInteracting = anim.GetBool("isInteracting");
-
+            anim.SetBool("isInAir", true);
 
             float delta = Time.deltaTime;
 
@@ -70,6 +72,7 @@ namespace EB
             isSprinting = inputHandler.b_Input;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
+            inputHandler.jump_Input = false;
 
             if (isInAir)
             {

@@ -16,15 +16,19 @@ namespace EB
         public bool b_Input;
         public bool rb_Input;
         public bool rt_Input;
+        public bool jump_Input;
+        public bool lockOnInput;
 
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
+        public bool lockOnFlag;
         
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
+        CameraHandler cameraHandler;
         
 
         Vector2 movementInput;
@@ -35,6 +39,7 @@ namespace EB
         {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
 
@@ -45,6 +50,10 @@ namespace EB
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovment.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovment.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerActions.Jump.performed += inputActions => jump_Input = true;
+                inputActions.PlayerActions.RB.performed += inputActions => rb_Input = true;
+                inputActions.PlayerActions.RT.performed += inputActions => rt_Input = true;
+                inputActions.PlayerActions.LockOn.performed += inputActions => lockOnInput = true;
             }
 
             inputActions.Enable();
@@ -62,6 +71,9 @@ namespace EB
             MoveInput(delta);
             HandleRollInput(delta);
             HandleAttackinput(delta);
+            HandleLockOnInput();
+
+
         }
 
 
@@ -103,8 +115,7 @@ namespace EB
 
         private void HandleAttackinput(float delta)
         {
-            inputActions.PlayerActions.RB.performed += inputActions => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += inputActions => rt_Input = true;
+            
 
 
             //RB Input handles the right hand weapon's light attack
@@ -119,8 +130,28 @@ namespace EB
             }
         }
 
-
-
+       
+        private void HandleLockOnInput()
+        {
+            if (lockOnInput && lockOnFlag == false)
+            {
+                cameraHandler.ClearLockOnTargets();
+                lockOnInput = false;
+                lockOnFlag = true;
+                cameraHandler.HandleLockOn();
+                if (cameraHandler.nearestLockOnTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+                    lockOnFlag = true;
+                }
+            }
+            else if (lockOnInput && lockOnFlag)
+            {
+                lockOnInput = false;
+                lockOnFlag = false;
+                cameraHandler.ClearLockOnTargets();
+            }
+        }
 
 
     }
