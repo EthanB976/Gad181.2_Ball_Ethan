@@ -248,7 +248,7 @@ namespace EB
 
         public void HandleJumping()
         {
-            Debug.Log("jump");
+            
             if (playerManager.isInteracting)
             {
                 return;
