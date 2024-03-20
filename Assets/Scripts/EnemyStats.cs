@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EB
 {
-    public class EnemyStats : MonoBehaviour
+    public class EnemyStats : CharacterStats
     {
 
         public int healthLevel = 10;
