@@ -8,7 +8,10 @@ namespace EB
     {
 
         EnemyLocomotionManager enemyLocomotionManager;
-        bool isPerformingAction;
+        public bool isPerformingAction;
+
+        public EnemyAttackAction[] enemyAttacks;
+        public EnemyAttackAction currentAttack;
 
 
         [Header ("A.I Settings")]
@@ -22,18 +25,82 @@ namespace EB
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-             HandleCurrentAction();
+            HandleCurrentAction();
+            
+             
         }
 
         private void HandleCurrentAction()
         {
-            
-            
-             enemyLocomotionManager.HandleDectection();
-            
+            if (enemyLocomotionManager.currentTarget == null)
+            {
+                enemyLocomotionManager.HandleDectection();
+            }
+            else if (enemyLocomotionManager.distanceFromTarget > enemyLocomotionManager.stoppingDistance)
+            {
+                enemyLocomotionManager.HandleMoveToTarget();
+            }
+            else if (enemyLocomotionManager.distanceFromTarget <= enemyLocomotionManager.stoppingDistance)
+            {
+                //Handle attacks
+
+            }
+
+
+
         }
+
+        #region Attacks
+        private void GetNewAttack()
+        {
+            Vector3 targetDirection = enemyLocomotionManager.currentTarget.transform.position - transform.position;
+            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+            enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+
+            int maxScore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++)
+            {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (enemyLocomotionManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyLocomotionManager.distanceFromTarget >= enemyAttackAction.minimumAttackAngle)
+                {
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    {
+                        maxScore += enemyAttackAction.attackScore;
+                    }
+                }
+            }
+
+            int randomValue = Random.Range(0, maxScore);
+            int temporarySCore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++)
+            {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (enemyLocomotionManager.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack && enemyLocomotionManager.distanceFromTarget >= enemyAttackAction.minimumAttackAngle)
+                {
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    {
+                        if (currentAttack != null)
+                        {
+                            return;
+                        }
+
+                        temporarySCore += enemyAttackAction.attackScore;
+
+                        if (temporarySCore > randomValue)
+                        {
+                            currentAttack = enemyAttackAction;
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
 
         private void OnDrawGizmosSelected()
         {

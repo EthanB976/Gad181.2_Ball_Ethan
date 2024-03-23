@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace EB
 {
-    public class AnimatorHandler : MonoBehaviour
+    public class AnimatorHandler : AnimatorManager
     {
         PlayerManager playerManager;
-        public Animator anim;
+        
         public InputHandler inputHandler;
         public PlayerLocomotion playerLocomotion;
         int vertical;
@@ -87,12 +87,7 @@ namespace EB
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
-        {
-            anim.applyRootMotion = isInteracting;
-            anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.2f);
-        }
+       
 
 
         public void CanRotate()
