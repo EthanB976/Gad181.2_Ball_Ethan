@@ -19,6 +19,8 @@ namespace EB
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
+        public bool isUsingRighthand;
+        public bool isUsingLefthand;
 
 
         private void Awake()
@@ -41,6 +43,8 @@ namespace EB
         {
             isInteracting = anim.GetBool("isInteracting");
             anim.SetBool("isInAir", true);
+            isUsingRighthand = anim.GetBool("isUsingRightHand");
+            isUsingLefthand = anim.GetBool("isUsingLeftHand");
 
             float delta = Time.deltaTime;
 

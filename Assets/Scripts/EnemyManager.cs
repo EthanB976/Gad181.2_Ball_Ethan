@@ -12,6 +12,7 @@ namespace EB
 
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
+        EnemyAnimatorManager enemyAnimatorManager;
 
 
         [Header ("A.I Settings")]
@@ -20,20 +21,34 @@ namespace EB
         public float maximumDetectionAngle = 50;
         public float minimumDetectionAngle = -50;
 
+        public float currentRecoveryTime = 0;
+
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+            enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+        }
+
+        private void Update()
+        {
+            HandleRecoveryTime();
         }
 
         private void FixedUpdate()
         {
             HandleCurrentAction();
+
             
              
         }
 
         private void HandleCurrentAction()
         {
+            //if (enemyLocomotionManager != null)
+            //{
+            //    enemyLocomotionManager.distanceFromTarget = Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
+            //}
+            
             if (enemyLocomotionManager.currentTarget == null)
             {
                 enemyLocomotionManager.HandleDectection();
@@ -44,12 +59,27 @@ namespace EB
             }
             else if (enemyLocomotionManager.distanceFromTarget <= enemyLocomotionManager.stoppingDistance)
             {
-                //Handle attacks
-
+                AttackTarget();
             }
 
 
 
+        }
+
+        private void HandleRecoveryTime()
+        {
+            if (currentRecoveryTime > 0)
+            {
+                currentRecoveryTime -= Time.deltaTime;
+            }
+
+            if (isPerformingAction)
+            {
+                if (currentRecoveryTime <= 0)
+                {
+                    isPerformingAction = false;
+                }
+            }
         }
 
         #region Attacks
@@ -98,6 +128,28 @@ namespace EB
                         }
                     }
                 }
+            }
+        }
+
+        private void AttackTarget()
+        {
+            if (isPerformingAction)
+            {
+                return;
+            }
+
+
+
+            if (currentAttack == null)
+            {
+                GetNewAttack();
+            }
+            else
+            {
+                isPerformingAction = true;
+                currentRecoveryTime = currentAttack.recoveryTime;
+                enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+                currentAttack = null;
             }
         }
         #endregion

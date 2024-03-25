@@ -21,7 +21,7 @@ namespace EB
         public float distanceFromTarget;
         public float stoppingDistance = 1.2f;
 
-        public float rotationSpeed = 25;
+        public float rotationSpeed = 50;
 
 
         private void Awake()
@@ -70,6 +70,11 @@ namespace EB
 
         public void HandleMoveToTarget()
         {
+            if (enemyManager.isPerformingAction && distanceFromTarget > stoppingDistance)
+            {
+                return;
+            }
+
             Vector3 targetDirection = currentTarget.transform.position - transform.position;
             distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);   
             float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
@@ -137,7 +142,7 @@ namespace EB
                 }
                 
                 enemyRigidBody.velocity = targetVeclocity;
-                transform.rotation = Quaternion.Slerp(transform.rotation, navMeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, navMeshAgent.transform.rotation, rotationSpeed / Time.deltaTime);
             }
 
             

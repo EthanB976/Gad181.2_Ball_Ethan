@@ -29,6 +29,7 @@ namespace EB
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         CameraHandler cameraHandler;
+        AnimatorHandler animatorHandler;
         
 
         Vector2 movementInput;
@@ -40,6 +41,7 @@ namespace EB
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             cameraHandler = FindObjectOfType<CameraHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
 
@@ -122,11 +124,13 @@ namespace EB
             if (rb_Input)
             {
                 playerAttacker.HandleLightAttack(playerInventory.rightweapon);
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
             }
 
             if (rt_Input)
             {
                 playerAttacker.HandleHeavyAttack(playerInventory.rightweapon);
+                animatorHandler.anim.SetBool("isUsingRightHand", true);
             }
         }
 
