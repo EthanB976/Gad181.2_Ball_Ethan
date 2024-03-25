@@ -1579,7 +1579,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -5096,7 +5096,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -5290,7 +5290,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -8198,7 +8198,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -8392,7 +8392,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -8667,7 +8667,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -9113,7 +9113,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -9954,7 +9954,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -11736,7 +11736,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -13288,7 +13288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -13802,7 +13802,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -15427,7 +15427,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -15946,7 +15946,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
@@ -24283,7 +24283,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 185a21edad57f4941b0d8c16c5dad804, type: 2}
   - {fileID: 11400000, guid: 77d2eaf943e622a449c8c9fa7b442f83, type: 2}
   currentAttack: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 50
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
