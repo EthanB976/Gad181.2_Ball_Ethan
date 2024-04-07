@@ -8,7 +8,14 @@ namespace EB
     {
 
         [Header("Movement")]
-        public float moveSpeed;
+        private float moveSpeed;
+        public float walkSpeed;
+        public float sprintSpeed;
+        public float slideSpeed;
+        public float wallRunSpeed;
+
+        private float desiredMoveSpeed;
+        private float lasrDesiredMoveSpeed;
 
         public float groundDrag;
 
@@ -17,28 +24,140 @@ namespace EB
         public float airMulitplier;
         bool readyToJump;
 
+        [Header("Crouching")]
+        public float crouchSpeed;
+        public float crouchYScale;
+        private float startYScale;
+
         [Header("keybinds")]
         public KeyCode jumpKey = KeyCode.Space;
+        public KeyCode sprintKey = KeyCode.LeftShift;
+        public KeyCode crouchKey = KeyCode.LeftControl;
 
         [Header("Ground Check")]
         public float playerHeight;
         public LayerMask whatIsGround;
         bool grounded;
 
+        [Header("Slope Handling")]
+        public float maxSlopeAngle;
+        private RaycastHit slopeHit;
+        private bool exitingSlope;
+
         public Transform orientation;
 
         float horizontalInput;
         float verticalInput;
 
+        public bool sliding;
+        public bool wallrunning;
+
         Vector3 moveDirection;
 
         Rigidbody rb;
+
+        public MovementState state;
+
+        public enum MovementState
+        {
+            walking,
+            sprinting,
+            wallrunning,
+            crouching,
+            sliding,
+            air
+        }
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
             readyToJump = true;
+
+            startYScale = transform.localScale.y;
+        }
+
+        private void StateHandler()
+        {
+
+            // Mode - Wallrunning
+            if (wallrunning)
+            {
+                state = MovementState.wallrunning;
+                desiredMoveSpeed = wallRunSpeed;
+            }
+
+            // Mode - Sliding
+            else if (sliding)
+            {
+                state = MovementState.sliding;
+
+                if(OnSlope() && rb.velocity.y < 0.1f)
+                {
+                    desiredMoveSpeed = slideSpeed;
+                }
+                else
+                {
+                    desiredMoveSpeed = sprintSpeed;
+                }
+            }
+
+            // Mode - crouching
+            else if(Input.GetKey(crouchKey))
+            {
+                state = MovementState.crouching;
+                desiredMoveSpeed = crouchSpeed;
+            }
+
+            // Mode - Sprinting
+            else if(grounded && Input.GetKey(sprintKey))
+            {
+                state = MovementState.sprinting;
+                desiredMoveSpeed = sprintSpeed;
+            }
+
+            // Mode - Wlaking
+            else if (grounded)
+            {
+                state = MovementState.walking;
+                desiredMoveSpeed = walkSpeed;
+            }
+
+            // Mode - Air
+            else
+            {
+                state = MovementState.air;
+            }
+
+            // check if desiredMoveSpeed has chnaged drastically
+            if(Mathf.Abs(desiredMoveSpeed - lasrDesiredMoveSpeed) > 4f && moveSpeed != 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                moveSpeed = desiredMoveSpeed;
+            }
+
+            lasrDesiredMoveSpeed = desiredMoveSpeed;
+        }
+
+        private IEnumerator SmoothlyLerpMoveSpeed()
+        {
+            // smoothly lerp movement speed to desired value
+            float time = 0;
+            float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+            float startValue = moveSpeed;
+
+            while (time < difference)
+            {
+                moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            moveSpeed = desiredMoveSpeed;
         }
 
         private void FixedUpdate() 
@@ -52,6 +171,7 @@ namespace EB
 
             MyInput();
             SpeedControl();
+            StateHandler();
 
             // handle drag
             if(grounded)
@@ -81,6 +201,19 @@ namespace EB
 
                 
             }
+
+            // start couching
+            if (Input.GetKeyDown(crouchKey))
+            {
+                transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+                rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            }
+
+            // stop crouch
+            if (Input.GetKeyUp(crouchKey))
+            {
+                transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            }
         }
 
         private void MovePlayer()
@@ -88,8 +221,19 @@ namespace EB
             //calculate movement direction
             moveDirection = orientation.forward *verticalInput + orientation.right *horizontalInput;
 
+            // on slope
+            if (OnSlope() && !exitingSlope)
+            {
+                rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
+
+                if(rb.velocity.y > 0)
+                {
+                    rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                }
+            }
+
             // on ground 
-            if (grounded)
+            else if (grounded)
             {
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
             }
@@ -99,22 +243,43 @@ namespace EB
             {
                 rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulitplier, ForceMode.Force);
             }
+
+            // turn gravity off while on slope
+            rb.useGravity = !OnSlope();
         }
 
         private void SpeedControl()
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-            // limit velocity if needed
-            if(flatVel.magnitude > moveSpeed)
+            // limiting speed on slope 
+            if (OnSlope())
             {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                if (rb.velocity.magnitude > moveSpeed)
+                {
+                    rb.velocity = rb.velocity.normalized * moveSpeed;
+                }
             }
+
+            // limiting speed on ground or in air
+            else
+            {
+                Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+                // limit velocity if needed
+                if (flatVel.magnitude > moveSpeed)
+                {
+                    Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                    rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                }
+            }
+            
         }
 
         private void Jump()
         {
+
+            exitingSlope = true;
+
             // reset y velocity
             rb.velocity = new Vector3(rb.velocity.x, 0F, rb.velocity.z);
 
@@ -125,6 +290,24 @@ namespace EB
         private void ResetJump()
         {
             readyToJump = true;
+
+            exitingSlope = false;
+        }
+
+        public bool OnSlope()
+        {
+            if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+            {
+                float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+                return angle < maxSlopeAngle && angle != 0;
+            }
+
+            return false;
+        }
+
+        public Vector3 GetSlopeMoveDirection(Vector3 direction)
+        {
+            return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
         }
     }
 }
