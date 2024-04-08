@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Shake Fighter.unity
+    path: Assets/ShakeFighter/Scenes/Shake Fighter.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d761eb51f323e5e459fb65aa4a957a23, type: 2}
