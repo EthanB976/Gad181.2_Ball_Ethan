@@ -7,9 +7,10 @@ namespace EB
     public class MoveCamera : MonoBehaviour
     {
         public Transform cameraPosition;
-        void Update()
+        void Start()
         {
-            transform.position = cameraPosition.position;
+            transform.SetParent(cameraPosition, false);
+
         }
     }
 }

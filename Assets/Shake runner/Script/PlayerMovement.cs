@@ -12,6 +12,7 @@ namespace EB
         public float walkSpeed;
         public float sprintSpeed;
         public float slideSpeed;
+        public float climbSpeed;
         public float wallRunSpeed;
 
         private float desiredMoveSpeed;
@@ -37,7 +38,9 @@ namespace EB
         [Header("Ground Check")]
         public float playerHeight;
         public LayerMask whatIsGround;
-        bool grounded;
+        public bool grounded;
+        public Transform groundCheck;
+        public float groundDistance = 0.4f;
 
         [Header("Slope Handling")]
         public float maxSlopeAngle;
@@ -51,6 +54,7 @@ namespace EB
 
         public bool sliding;
         public bool wallrunning;
+        public bool climbing;
 
         Vector3 moveDirection;
 
@@ -63,6 +67,7 @@ namespace EB
             walking,
             sprinting,
             wallrunning,
+            climbing,
             crouching,
             sliding,
             air
@@ -79,9 +84,15 @@ namespace EB
 
         private void StateHandler()
         {
+            // Mode - Climbing
+            if (climbing)
+            {
+                state = MovementState.climbing;
+                desiredMoveSpeed = climbSpeed;
+            }
 
             // Mode - Wallrunning
-            if (wallrunning)
+            else if (wallrunning)
             {
                 state = MovementState.wallrunning;
                 desiredMoveSpeed = wallRunSpeed;
@@ -168,6 +179,7 @@ namespace EB
         {
             // ground check
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            grounded = Physics.CheckSphere(groundCheck.position, groundDistance, whatIsGround);
 
             MyInput();
             SpeedControl();
@@ -245,7 +257,10 @@ namespace EB
             }
 
             // turn gravity off while on slope
-            rb.useGravity = !OnSlope();
+            if (!wallrunning)
+            {
+                rb.useGravity = !OnSlope();
+            }
         }
 
         private void SpeedControl()
