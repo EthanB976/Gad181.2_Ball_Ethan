@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 244124764}
   - component: {fileID: 244124765}
   - component: {fileID: 244124766}
+  - component: {fileID: 244124767}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -414,9 +415,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  slideSpeed: 30
+  slideSpeed: 1000
   climbSpeed: 5
   wallRunSpeed: 8.5
+  dashSpeed: 50
   groundDrag: 5
   jumpForce: 12
   jumpCoolDown: 0.25
@@ -438,6 +440,7 @@ MonoBehaviour:
   sliding: 0
   wallrunning: 0
   climbing: 0
+  dashing: 0
   state: 0
 --- !u!114 &244124764
 MonoBehaviour:
@@ -514,6 +517,25 @@ MonoBehaviour:
   detectionLength: 0.7
   spherecastRadius: 0.1
   maxWalllookAngle: 30
+--- !u!114 &244124767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244124760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d95fd2eb16ba0144a08755b23346ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1573418794}
+  playerCam: {fileID: 283267155}
+  dashForce: 1000
+  dashUpwardForce: 500
+  dashDuration: 0.25
+  dashCd: 1.5
+  dashKey: 101
 --- !u!1 &283267154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1353,7 @@ GameObject:
   - component: {fileID: 1225160899}
   - component: {fileID: 1225160898}
   - component: {fileID: 1225160897}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
