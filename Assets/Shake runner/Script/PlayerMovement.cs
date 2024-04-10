@@ -14,6 +14,7 @@ namespace EB
         public float slideSpeed;
         public float climbSpeed;
         public float wallRunSpeed;
+        public float dashSpeed;
 
         private float desiredMoveSpeed;
         private float lasrDesiredMoveSpeed;
@@ -55,6 +56,7 @@ namespace EB
         public bool sliding;
         public bool wallrunning;
         public bool climbing;
+        public bool dashing;
 
         Vector3 moveDirection;
 
@@ -69,6 +71,7 @@ namespace EB
             wallrunning,
             climbing,
             crouching,
+            dashing,
             sliding,
             air
         }
@@ -84,8 +87,15 @@ namespace EB
 
         private void StateHandler()
         {
+            // Mode - Dashing
+            if (dashing)
+            {
+                state = MovementState.dashing;
+                moveSpeed = dashSpeed;
+            }
+
             // Mode - Climbing
-            if (climbing)
+            else if (climbing)
             {
                 state = MovementState.climbing;
                 desiredMoveSpeed = climbSpeed;
@@ -186,7 +196,7 @@ namespace EB
             StateHandler();
 
             // handle drag
-            if(grounded)
+            if(state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)
             {
                 rb.drag = groundDrag;
             }
