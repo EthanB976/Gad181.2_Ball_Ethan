@@ -534,7 +534,7 @@ MonoBehaviour:
   dashForce: 1000
   dashUpwardForce: 500
   dashDuration: 0.25
-  dashCd: 1.5
+  dashCd: 3
   dashKey: 101
 --- !u!1 &283267154
 GameObject:
