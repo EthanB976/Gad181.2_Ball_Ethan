@@ -355,10 +355,11 @@ namespace EB
 
         private IEnumerator Spawn()
         {
+            disabled = true;
             Debug.Log("Respawn");
             yield return new WaitForSeconds(0.001f);
             transform.position = (Vector3)_respawnPoint;
-
+            disabled = false;
         }
 
 
