@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace EB
 {
     public class PlayerMovement : MonoBehaviour
     {
+        public bool disabled = false;
 
         [Header("Movement")]
         private float moveSpeed;
@@ -83,6 +85,8 @@ namespace EB
             readyToJump = true;
 
             startYScale = transform.localScale.y;
+
+            SetRespawnPoint((Vector3)transform.position);
         }
 
         private void StateHandler()
@@ -183,7 +187,11 @@ namespace EB
 
         private void FixedUpdate() 
         {
-            MovePlayer();
+            if (!disabled)
+            {
+                MovePlayer();
+            }
+            
         }
         private void Update()
         {
@@ -334,6 +342,64 @@ namespace EB
         {
             return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
         }
+
+
+        //Respawn
+
+        private Vector3 _respawnPoint;
+
+        public void SetRespawnPoint(Vector3 position)
+        {
+            _respawnPoint = (Vector3)position;
+        }
+
+        private IEnumerator Spawn()
+        {
+            Debug.Log("Respawn");
+            yield return new WaitForSeconds(0.001f);
+            transform.position = (Vector3)_respawnPoint;
+
+        }
+
+
+
+
+        private void OnTriggerEnter(Collider collision)
+        {
+
+            if (collision.gameObject.CompareTag("CheckPoint"))
+            {
+                SetRespawnPoint((Vector3)transform.position);
+                Debug.Log("Set Check Point");
+            }
+        }
+
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            Debug.Log("Die");
+            StartCoroutine(Spawn());
+
+        }
+
+
+        public void Teleport(Vector3 position, Quaternion rotation)
+        {
+            transform.position = position;
+            Physics.SyncTransforms();
+            
+
+        }
+
+
     }
 }
 

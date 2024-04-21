@@ -8,6 +8,8 @@ TagManager:
   - Collide
   - Hittable
   - Enemy
+  - Water
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
