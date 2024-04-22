@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -192,6 +193,7 @@ namespace EB
                 MovePlayer();
             }
             
+            
         }
         private void Update()
         {
@@ -350,14 +352,14 @@ namespace EB
 
         public void SetRespawnPoint(Vector3 position)
         {
-            _respawnPoint = (Vector3)position;
+            _respawnPoint = (Vector3)transform.position;
         }
 
         private IEnumerator Spawn()
         {
             disabled = true;
             Debug.Log("Respawn");
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(1f);
             transform.position = (Vector3)_respawnPoint;
             disabled = false;
         }
@@ -396,10 +398,10 @@ namespace EB
         {
             transform.position = position;
             Physics.SyncTransforms();
-            
 
         }
 
+        
 
     }
 }
