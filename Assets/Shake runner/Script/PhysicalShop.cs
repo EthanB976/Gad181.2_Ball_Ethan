@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PhysicalShop : MonoBehaviour
 {
-    public ShopManager shopMenu; 
+    public ShopManager shopMenu;
 
-    [SerializeField] public Canvas shopCanvas ;
+    [SerializeField] public Canvas shopCanvas;
 
-    private bool shopActive = false;
 
     private void Start()
     {
@@ -17,14 +16,14 @@ public class PhysicalShop : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") == true && Input.GetKeyDown(KeyCode.Q))
+        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.Q))
         {
-            //shopMenu.gameObject.SetActive(!shopMenu.gameObject.activeSelf);
+           
             Debug.Log("Bruh");
 
             shopCanvas.enabled = true;
         }
 
-
     }
 }
+

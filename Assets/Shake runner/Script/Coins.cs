@@ -6,7 +6,7 @@ public class Coins : MonoBehaviour
 {
     [SerializeField] protected private int value;
 
-
+   
 
     private void Start()
     {
