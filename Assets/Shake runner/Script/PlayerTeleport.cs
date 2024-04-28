@@ -9,21 +9,23 @@ namespace EB
     {
         [SerializeField] Transform destination;
 
-        PlayerMovement pm;
+        [SerializeField] GameObject Player;
 
-        void Start ()
+        
+
+        private void OnTriggerStay(Collider other)
         {
-            pm = GetComponent<PlayerMovement>();    
+            if (Input.GetKey(KeyCode.Q))
+            {
+                StartCoroutine(Teleport());
+            }
+            
         }
 
-        private void OnTriggerEnter(Collider other)
+        IEnumerator Teleport()
         {
-            if (other.CompareTag("Player") && other.TryGetComponent<PlayerMovement>(out var playerMovement))
-            {
-                Debug.Log("Teleporting");
-                pm.Teleport(destination.position, destination.rotation);
-
-            }
+            yield return new WaitForSeconds(1);
+            Player.transform.position = new Vector3 (destination.transform.position.x, destination.transform.position.y, destination.transform.position.z);
         }
 
     }
