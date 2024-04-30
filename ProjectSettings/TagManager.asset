@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Water
   - CheckPoint
+  - timePlus
+  - Spike
   layers:
   - Default
   - TransparentFX
