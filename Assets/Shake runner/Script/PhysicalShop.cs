@@ -22,8 +22,19 @@ public class PhysicalShop : MonoBehaviour
             Debug.Log("Bruh");
 
             shopCanvas.enabled = true;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        shopCanvas.enabled = false;
     }
 }
 

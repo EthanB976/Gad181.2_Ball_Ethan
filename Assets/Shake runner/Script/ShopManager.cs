@@ -13,9 +13,16 @@ public class ShopManager : MonoBehaviour
 
     public static ShopManager instance;
 
+    [SerializeField] private Button Sliding;
+    [SerializeField] private Button WallRunning;
+    [SerializeField] private Button Dashing;
+    [SerializeField] private Button Climbing; 
+
     void Awake()
     {
         instance = this;
+
+        Dashing.enabled = false;
     }
 
     private void Start()
@@ -41,4 +48,25 @@ public class ShopManager : MonoBehaviour
         currentCoins -= amount;
     }
 
+    private void Update()
+    {
+        if (currentCoins >= 1)
+        {
+            Dashing.enabled = true;
+        }
+        else
+        {
+            Dashing.enabled = false;
+        }
+
+        if (currentCoins >= 1) 
+        {
+            Sliding.enabled = true;
+        }
+        else 
+        { 
+            Sliding.enabled = false; 
+        }
+        
+    }
 }

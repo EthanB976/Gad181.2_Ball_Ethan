@@ -25,6 +25,7 @@ namespace EB
         [Header("Input")]
         public KeyCode dashKey = KeyCode.E;
 
+        public bool purchaseDash = false;
         void Start ()
         {
             rb = GetComponent<Rigidbody>();
@@ -45,27 +46,34 @@ namespace EB
             }
         }
 
-        private void Dash()
+        public void Dash()
         {
-
-            if (dashCdTimer > 0)
+            if (purchaseDash == true)
             {
-                return;
+                if (dashCdTimer > 0)
+                {
+                    return;
+                }
+
+                else
+                {
+                    dashCdTimer = dashCd;
+                }
+
+                pm.dashing = true;
+
+                Vector3 forecToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
+
+                delayedForceToApply = forecToApply;
+                Invoke(nameof(DelayedDashForce), 0.025f);
+
+                Invoke(nameof(ResetDash), dashDuration);
             }
+        }
 
-            else
-            {
-                dashCdTimer = dashCd;
-            }
-
-            pm.dashing = true;
-
-            Vector3 forecToApply = orientation.forward * dashForce + orientation.up * dashUpwardForce;
-
-            delayedForceToApply = forecToApply;
-            Invoke(nameof(DelayedDashForce), 0.025f);
-
-            Invoke(nameof(ResetDash), dashDuration);
+        public void ShopDash()
+        {
+            purchaseDash = true;
         }
 
         private Vector3 delayedForceToApply;
