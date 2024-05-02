@@ -29,47 +29,53 @@ namespace EB
         private RaycastHit frontWallHit;
         private bool wallFront;
 
+        public bool purchaseClimb = false; 
+
         private void Update()
         {
-            WallCheck();
-            StateMachine();
-
-            if(climbing)
+            if (purchaseClimb == true)
             {
-                ClimbingMovement();
+                WallCheck();
+                StateMachine();
+
+                if (climbing)
+                {
+                    ClimbingMovement();
+                }
             }
         }
 
         private void StateMachine()
         {
-            // State 1 - Climbing
-            if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWalllookAngle)
-            {
-                if (!climbing && climbTimer > 0)
+                // State 1 - Climbing
+                if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWalllookAngle)
                 {
-                    StartClimbing();
+                    if (!climbing && climbTimer > 0)
+                    {
+                        StartClimbing();
+                    }
+
+                    // timer
+                    if (climbTimer > 0)
+                    {
+                        climbTimer -= Time.deltaTime;
+                    }
+
+                    if (climbTimer < 0)
+                    {
+                        StopClimbing();
+                    }
                 }
 
-                // timer
-                if (climbTimer > 0)
+                // State 3 - None
+                else
                 {
-                    climbTimer -= Time.deltaTime;
+                    if (climbing)
+                    {
+                        StopClimbing();
+                    }
                 }
-
-                if (climbTimer < 0)
-                {
-                    StopClimbing();
-                }
-            }
-
-            // State 3 - None
-            else
-            {
-                if (climbing)
-                {
-                    StopClimbing();
-                }
-            }
+            
         }
 
         private void WallCheck()
@@ -98,6 +104,11 @@ namespace EB
         {
             climbing = false;
             pm.climbing = false;
+        }
+
+        public void ShopClimbing()
+        {
+            purchaseClimb = true;
         }
     }
 

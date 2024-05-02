@@ -49,6 +49,7 @@ namespace EB
         private PlayerMovement pm;
         private Rigidbody rb;
 
+        public bool purchaseWallRun = false;
         private void Start ()
         {
             rb = GetComponent<Rigidbody>();
@@ -57,8 +58,11 @@ namespace EB
 
         private void Update ()
         {
-            CheckForWall();
-            StateMachine();
+            if (purchaseWallRun == true)
+            {
+                CheckForWall();
+                StateMachine();
+            }
         }
 
         private void FixedUpdate()
@@ -80,70 +84,71 @@ namespace EB
         }
         
         private void StateMachine()
-        {
-            // getting Inputs
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
+        { 
+                // getting Inputs
+                horizontalInput = Input.GetAxisRaw("Horizontal");
+                verticalInput = Input.GetAxisRaw("Vertical");
 
-            upwardsRunning = Input.GetKey(upwardsRunKey);
-            downwardsRunning = Input.GetKey(downwardsRunKey);
+                upwardsRunning = Input.GetKey(upwardsRunKey);
+                downwardsRunning = Input.GetKey(downwardsRunKey);
 
-            // State 1 - WallRunning
-            if((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
-            {
-                // start wallrun here
-                if(!pm.wallrunning)
+                // State 1 - WallRunning
+                if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
                 {
-                    StartWallRun();
+                    // start wallrun here
+                    if (!pm.wallrunning)
+                    {
+                        StartWallRun();
+                    }
+
+                    // wallrun timer
+                    if (wallRunTimer > 0)
+                    {
+                        wallRunTimer -= Time.deltaTime;
+                    }
+
+                    if (wallRunTimer <= 0 && pm.wallrunning)
+                    {
+                        exitingWall = true;
+                        exitWallTimer = exitWallTime;
+                    }
+
+                    // wall jump 
+                    if (Input.GetKeyDown(jumpKey))
+                    {
+                        WallJump();
+                    }
                 }
 
-                // wallrun timer
-                if(wallRunTimer > 0)
+                // state 2 - Exiting
+                else if (exitingWall)
                 {
-                    wallRunTimer -= Time.deltaTime;
+                    if (pm.wallrunning)
+                    {
+                        StopWallRun();
+                    }
+
+                    if (exitWallTimer > 0)
+                    {
+                        exitWallTimer -= Time.deltaTime;
+                    }
+
+                    if (exitWallTimer <= 0)
+                    {
+                        exitingWall = false;
+                    }
+
                 }
 
-                if (wallRunTimer <= 0 && pm.wallrunning)
+                // State 3 - None
+                else
                 {
-                    exitingWall = true;
-                    exitWallTimer = exitWallTime;
+                    if (pm.wallrunning)
+                    {
+                        StopWallRun();
+                    }
                 }
-
-                // wall jump 
-                if (Input.GetKeyDown(jumpKey))
-                {
-                    WallJump();
-                }
-            }
-
-            // state 2 - Exiting
-            else if (exitingWall)
-            {
-                if (pm.wallrunning)
-                {
-                    StopWallRun();
-                }
-
-                if (exitWallTimer > 0)
-                {
-                    exitWallTimer -= Time.deltaTime;
-                }
-
-                if (exitWallTimer <= 0)
-                {
-                    exitingWall = false;
-                }
-                
-            }
-
-            // State 3 - None
-            else
-            {
-                if (pm.wallrunning)
-                {
-                    StopWallRun();
-                }
-            }
+            
         }
 
         private void StartWallRun()
@@ -228,6 +233,11 @@ namespace EB
             // reset y velocity and add force
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(forceToApply, ForceMode.Impulse);
+        }
+
+        public void ShopWallRun()
+        {
+            purchaseWallRun = true;
         }
     }
 }

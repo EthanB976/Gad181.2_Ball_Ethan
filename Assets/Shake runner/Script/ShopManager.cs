@@ -67,6 +67,22 @@ public class ShopManager : MonoBehaviour
         { 
             Sliding.enabled = false; 
         }
-        
+
+        if (currentCoins >=1)
+        {
+            Climbing.enabled = true;
+        }
+        else 
+        {
+            Climbing.enabled = false; 
+        }
+        if (currentCoins >= 1)
+        {
+            WallRunning.enabled = true;
+        }
+        else
+        {
+            WallRunning.enabled = false;
+        }
     }
 }

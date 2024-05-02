@@ -2398,6 +2398,7 @@ MonoBehaviour:
   gravityCounterForce: 10
   orientation: {fileID: 1573418794}
   cam: {fileID: 283267156}
+  purchaseWallRun: 0
 --- !u!114 &244124766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,6 +2423,7 @@ MonoBehaviour:
   detectionLength: 0.7
   spherecastRadius: 0.1
   maxWalllookAngle: 30
+  purchaseClimb: 0
 --- !u!114 &244124767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10808,7 +10810,7 @@ GameObject:
   - component: {fileID: 1112579117}
   - component: {fileID: 1112579116}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DisplayShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10834,8 +10836,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -87.788956, y: 81.80078}
-  m_SizeDelta: {x: -175.5779, y: -163.6016}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.000061035, y: -0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112579116
 MonoBehaviour:
@@ -11458,13 +11460,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 244124760}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 244124765}
+        m_TargetAssemblyTypeName: EB.WallRunning, Assembly-CSharp
+        m_MethodName: ShopWallRun
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13203,13 +13205,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 244124760}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 244124766}
+        m_TargetAssemblyTypeName: EB.Climbing, Assembly-CSharp
+        m_MethodName: ShopClimbing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
