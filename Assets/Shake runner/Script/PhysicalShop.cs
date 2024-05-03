@@ -16,10 +16,11 @@ public class PhysicalShop : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        //this checks if the player is inside the shop triggerzone
         if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.Q))
         {
-           
-            Debug.Log("Bruh");
+           //these are to enabkle the shop popup along with the cursor
+            Debug.Log("Opened Shop");
 
             shopCanvas.enabled = true;
 
@@ -31,6 +32,7 @@ public class PhysicalShop : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //this disables the cursor and the shop once the player has left
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

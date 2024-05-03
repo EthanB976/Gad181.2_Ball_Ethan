@@ -9,8 +9,9 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text coinText;
 
-    [SerializeField] public int currentCoins = 0;
+    [SerializeField] public int currentCoins;
 
+    [SerializeField] public int itemAmount = 20;
     public static ShopManager instance;
 
     [SerializeField] private Button Sliding;
@@ -23,6 +24,7 @@ public class ShopManager : MonoBehaviour
         instance = this;
 
         Dashing.enabled = false;
+        currentCoins = 0;
     }
 
     private void Start()
@@ -43,14 +45,15 @@ public class ShopManager : MonoBehaviour
         coinText.text = "You have " + currentCoins.ToString() + " Coins";
     }
     //This works with the UI update to subtract coins whenever an item is purchased
-    public void SubtractCoins(int amount)
+    public void SubtractCoins()
     {
-        currentCoins -= amount;
+        currentCoins -= 20;
     }
 
     private void Update()
     {
-        if (currentCoins >= 1)
+        //This is for enabling the button too be able to be clicked once the player has a certain number of coins
+        if (currentCoins >= 20)
         {
             Dashing.enabled = true;
         }
@@ -59,7 +62,7 @@ public class ShopManager : MonoBehaviour
             Dashing.enabled = false;
         }
 
-        if (currentCoins >= 1) 
+        if (currentCoins >= 20) 
         {
             Sliding.enabled = true;
         }
@@ -68,7 +71,7 @@ public class ShopManager : MonoBehaviour
             Sliding.enabled = false; 
         }
 
-        if (currentCoins >=1)
+        if (currentCoins >= 20)
         {
             Climbing.enabled = true;
         }
@@ -76,7 +79,7 @@ public class ShopManager : MonoBehaviour
         {
             Climbing.enabled = false; 
         }
-        if (currentCoins >= 1)
+        if (currentCoins >= 20)
         {
             WallRunning.enabled = true;
         }
@@ -85,4 +88,5 @@ public class ShopManager : MonoBehaviour
             WallRunning.enabled = false;
         }
     }
+   
 }
