@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Begining/Begining.unity
+    guid: 04329c706c42fa345906e291002f9eab
+  - enabled: 1
     path: Assets/ShakeFighter/Scenes/Shake Fighter.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Shake runner/Scenes/ShakeRunner.unity
+    guid: bb5de19a8bb080b478b8b9b8685485de
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d761eb51f323e5e459fb65aa4a957a23, type: 2}

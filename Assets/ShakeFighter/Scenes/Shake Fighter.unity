@@ -1554,7 +1554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -1893,7 +1893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -5071,7 +5071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -5265,7 +5265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -8173,7 +8173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -8367,7 +8367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -8684,7 +8684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -8861,7 +8861,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: be32d3c8a0e20d64faeedb8a24c49cff, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 721eafb8718019a4eafdc1c49c1e076b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &692933571
 PrefabInstance:
@@ -8926,7 +8926,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 26092616555691655, guid: 86e477d6015698b4ca2d27d2f2be9c3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1872033583}
+    - targetCorrespondingSourceObject: {fileID: 26092616555691655, guid: 86e477d6015698b4ca2d27d2f2be9c3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1872033582}
   m_SourcePrefab: {fileID: 100100000, guid: 86e477d6015698b4ca2d27d2f2be9c3c, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -9088,7 +9094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -9929,7 +9935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -11711,7 +11717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -13263,7 +13269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -13777,7 +13783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -15402,7 +15408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -15921,7 +15927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -24258,7 +24264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 0}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1855260086}
   dectectionLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -24620,6 +24626,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1643303630}
   m_LocalEulerAnglesHint: {x: 47.824, y: -186.03, z: 0}
+--- !u!1 &1872033578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 26092616555691655, guid: 86e477d6015698b4ca2d27d2f2be9c3c, type: 3}
+  m_PrefabInstance: {fileID: 692933571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872033582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872033578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e129c5a6f59235f4c8dda00cc644fcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1872033583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872033578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.816288, y: 3.4363832, z: 4.006639}
+  m_Center: {x: 6.139318, y: 1.7181916, z: -4.452434}
 --- !u!1 &1876728642
 GameObject:
   m_ObjectHideFlags: 0

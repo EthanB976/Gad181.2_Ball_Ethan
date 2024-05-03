@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurchasingItem : MonoBehaviour
+namespace EB
 {
-    [SerializeField] private ShopManager purchase;
-    
-
-    public void PurchaseItem()
+    public class PurchasingItem : MonoBehaviour
     {
-        Debug.Log("Purchased item");
+        [SerializeField] private ShopManager purchase;
 
-        // Also like to deduct coins
-        purchase.SubtractCoins();
-        purchase.UpdateUI();
 
-        //To hide the button and make it so it cant be purchased
-        //We can Deactivate the gameobject
+        public void PurchaseItem()
+        {
+            Debug.Log("Purchased item");
 
-        gameObject.SetActive(false);
+            // Also like to deduct coins
+            purchase.SubtractCoins();
+            purchase.UpdateUI();
+
+            //To hide the button and make it so it cant be purchased
+            //We can Deactivate the gameobject
+
+            gameObject.SetActive(false);
+        }
     }
 }
+

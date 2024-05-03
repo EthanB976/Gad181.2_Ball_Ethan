@@ -2,41 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicalShop : MonoBehaviour
+namespace EB
 {
-    public ShopManager shopMenu;
-
-    [SerializeField] public Canvas shopCanvas;
-
-
-    private void Start()
+    public class PhysicalShop : MonoBehaviour
     {
-        shopCanvas.enabled = false;
-    }
+        public ShopManager shopMenu;
 
-    void OnTriggerStay(Collider other)
-    {
-        //this checks if the player is inside the shop triggerzone
-        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.Q))
+        [SerializeField] public Canvas shopCanvas;
+
+
+        private void Start()
         {
-           //these are to enabkle the shop popup along with the cursor
-            Debug.Log("Opened Shop");
-
-            shopCanvas.enabled = true;
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            shopCanvas.enabled = false;
         }
 
-    }
+        void OnTriggerStay(Collider other)
+        {
+            //this checks if the player is inside the shop triggerzone
+            if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.Q))
+            {
+                //these are to enabkle the shop popup along with the cursor
+                Debug.Log("Opened Shop");
 
-    private void OnTriggerExit(Collider other)
-    {
-        //this disables the cursor and the shop once the player has left
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+                shopCanvas.enabled = true;
 
-        shopCanvas.enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            //this disables the cursor and the shop once the player has left
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            shopCanvas.enabled = false;
+        }
     }
 }
+
 
